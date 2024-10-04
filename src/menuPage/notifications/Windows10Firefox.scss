@@ -1,0 +1,68 @@
+@import './variables';
+@import './utilities';
+
+.windows10--firefox {
+  width: 100%;
+  max-width: 330px !important;
+  min-height: 82px !important;
+  border-radius: 3px 3px 0 0;
+  background: $color-white;
+
+  .notificiation__preview_url-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 12px;
+    margin-bottom: 6px;
+
+    .url-left {
+      overflow: hidden;
+      flex: 1;
+
+      .notification_preview_title {
+        color: #4e4b4b;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 11px;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 47px;
+      height: 47px;
+      object-fit: cover;
+      margin-left: 12px;
+    }
+  }
+
+  .right {
+    width: 233px;
+    margin-left: 12px;
+
+    .notification_preview_message {
+      color: #777;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 11px;
+      margin-bottom: 0;
+    }
+
+    span {
+      font-weight: 100;
+      font-size: 10px;
+      color: #9d9999;
+      word-break: break-all;
+    }
+  }
+
+  .anticon {
+    margin-right: 6px;
+  }
+}

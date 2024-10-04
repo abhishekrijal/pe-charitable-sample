@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards for PushEngage Plugin.">
+    <!-- Scan all files in directory -->
+    <file>.</file>
+
+    <!-- Scan only PHP files -->
+    <arg name="extensions" value="php"/>
+
+    <!-- Show colors in console -->
+    <arg value="-colors"/>
+
+    <!-- Show sniff codes in all reports -->
+    <arg value="ns"/>
+
+    <rule ref="Wordpress-Core">
+        <exclude name="PEAR.Commenting.ClassComment"/>
+        <exclude name="Generic.Commenting.DocComment.MissingShort"/>
+        <exclude name="PEAR.Commenting.ClassComment.Missing"/>
+        <exclude name="PEAR.Commenting.FileComment.Missing"/>
+        <exclude name="PEAR.Commenting.FileComment.MissingCategoryTag"/>
+        <exclude name="PEAR.Commenting.FileComment.MissingPackageTag"/>
+        <exclude name="PEAR.Commenting.FileComment.MissingLinkTag"/>
+        <exclude name="PEAR.Commenting.FileComment.MissingVersion"/>
+        <exclude name="PEAR.Commenting.InlineComment"/>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning"/>
+    </rule>
+    <rule ref="WordPress.Files.FileName">
+		<severity>0</severity>
+	</rule>
+
+    <!-- Include the WordPress-Extra standard. -->
+    <!-- <rule ref="WordPress-Extra">
+        <exclude name="WordPress.PHP.DisallowShortTernary"/>
+    </rule> -->
+
+    <!-- Let's also check that everything is properly documented. -->
+    <!-- <rule ref="WordPress-Docs">
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        <exclude name="Squiz.Commenting.ClassComment.Missing"/>
+    </rule> -->
+
+
+    <!-- Add in some extra rules from other standards. -->
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+    <rule ref="Generic.Commenting.Todo"/>
+
+    <!-- Setting textdomain. -->
+	<config name="text_domain" value="pushengage"/>
+    <config name="minimum_supported_wp_version" value="4.5"/>
+
+    <!--
+    Run against the PHPCompatibilityWP ruleset
+    Plugin should be compatible with PHP 5.6 and higher.
+    -->
+    <config name="testVersion" value="5.6-"/>
+    <rule ref="PHPCompatibilityWP">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+
+
+    <exclude-pattern>*/assets/*</exclude-pattern>
+    <exclude-pattern>*/languages/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/assets/build/*</exclude-pattern>
+</ruleset>

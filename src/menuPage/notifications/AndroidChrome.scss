@@ -1,0 +1,140 @@
+@import './variables';
+
+.android--chrome {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, system-ui, 'Myriad Pro', myriad-pro,
+    'Segoe UI', Ubuntu, 'Helvetica Neue', sans-serif;
+  width: 100%;
+  max-width: 330px !important;
+  box-shadow: 0 0 32px 0 rgb(0 0 0 / 6%) !important;
+  padding: 12px;
+  background-color: #fff;
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+
+  .notification__preview_url-bar {
+    display: flex;
+    justify-content: space-between;
+
+    .url-left {
+      overflow: hidden;
+      margin-right: 48px;
+      margin-top: -4px;
+
+      span {
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+      .browser-icon {
+        color: $color-neutral-65;
+      }
+
+      .browser-name {
+        white-space: nowrap;
+        color: $color-neutral-70;
+      }
+
+      .site-url {
+        color: $color-neutral-70;
+      }
+
+      .timestamp {
+        white-space: nowrap;
+        color: $color-neutral-70;
+      }
+    }
+
+    .url-right {
+      .notification__preview__arrow-icon {
+        width: 26px;
+        height: 18px;
+        background-color: $color-neutral-10;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .anticon {
+        font-size: 8px;
+      }
+    }
+  }
+
+  .notification__preview__body {
+    display: flex;
+    margin-top: 4px;
+
+    .left {
+      overflow: hidden;
+      flex: 1 1 auto;
+
+      .notification_preview_title {
+        color: #000;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 13px;
+        white-space: nowrap;
+        font-weight: 600;
+      }
+
+      .notification_preview_message {
+        color: $color-transparent;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 13.5px;
+        white-space: nowrap;
+      }
+    }
+
+    .right {
+      flex: 0 0 32px;
+
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        margin: 4px 0 0 10px;
+      }
+    }
+  }
+
+  .notification__preview_big-image {
+    overflow: hidden;
+    max-height: 180px;
+    border-radius: 16px;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 16px;
+    }
+  }
+
+  .notification__preview__footer {
+    display: flex;
+    margin-top: 12px;
+
+    .notification__preview__cta-btn {
+      background-color: $color-neutral-10;
+      color: $color-neutral-85;
+      max-width: 150px;
+      overflow: hidden;
+      padding: 5px 8px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 12px;
+      flex: 0 1 auto;
+      letter-spacing: -0.3px;
+
+      a {
+        color: $color-neutral-85;
+      }
+
+      & + .notification__preview__cta-btn {
+        margin-left: 8px;
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+@import './variables';
+@import './utilities';
+
+.windows11--chrome {
+  width: 360px !important;
+  max-width: 100% !important;
+  box-shadow: 0 0 2px rgb(0 0 0 / 20%) !important;
+  border-radius: 10px;
+  background-color: rgb(255 255 255 / 80%);
+  backdrop-filter: blur(16px);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    'Myriad Pro', myriad-pro, 'Helvetica Neue', sans-serif;
+
+  .notification__preview_big-image {
+    width: 100%;
+    max-height: 180px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+
+    img {
+      height: auto;
+      width: 100%;
+      max-width: 100;
+    }
+  }
+
+  .notification_header {
+    &.rounded-top-8 {
+      border-radius: 8px 8px 0 0;
+    }
+  }
+
+  .notification_body {
+    padding: 0 10px;
+
+    .notification_icon {
+      margin-right: 10px;
+      margin-top: 12px;
+      text-align: center;
+      flex: 56px 0 0;
+      flex-shrink: 0;
+
+      img {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
+    .notification_content {
+      padding: 8px 0 4px;
+      overflow: auto;
+
+      .notification_preview_title {
+        color: #1c1d1a;
+        font-weight: 500;
+        font-size: 14px;
+        margin-bottom: 0;
+        -webkit-line-clamp: 2;
+        max-height: 40px;
+        overflow: hidden;
+      }
+
+      .notification_preview_message {
+        color: #424344;
+        font-size: 14px;
+        margin-bottom: 4px;
+        -webkit-line-clamp: 4;
+        max-height: 76px;
+        overflow: hidden;
+      }
+
+      .notification_preview_url {
+        color: #424344;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    padding: 12px 10px 14px;
+    border-radius: 0 0 8px 8px;
+    gap: 8px;
+
+    .notification_preview_button {
+      flex: 50% 0;
+      color: #1c1d1a;
+      background-color: $color-white;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+      border: 1px solid $color-neutral-4;
+
+      img {
+        width: 16px;
+        height: 16px;
+        margin: 2px;
+        display: block;
+      }
+    }
+  }
+}
