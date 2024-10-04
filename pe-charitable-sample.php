@@ -190,7 +190,11 @@ class PE_Charitable_Sample {
 	 * @param bool $is_preview Whether it's a preview.
 	 */
 	public function save_campaign_data( $campaign_id, $campaign_settings_v2, $campaign_post, $is_preview ) {
-        $campaign_name = $campaign_settings_v2['title'];
+		if ( ! function_exists( 'pushengage' ) ) {
+			return;
+		}
+		
+		$campaign_name = $campaign_settings_v2['title'];
         $segments      = pushengage()->get_segments();
 
 		if ( ! is_wp_error( $segments ) && ! empty( $segments['data'] ) ) {
