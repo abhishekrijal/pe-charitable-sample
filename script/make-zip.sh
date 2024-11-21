@@ -49,6 +49,7 @@ fi
 
 zip -r "${ZIP_FILE}" \
     build/ \
+    assets/ \
     src/ \
     pe-charitable-sample.php \
     readme.txt \
