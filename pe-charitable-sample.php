@@ -184,34 +184,68 @@ class PE_Charitable_Sample {
 	/**
 	 * Save campaign data.
 	 *
-	 * @param int $campaign_id The ID of the campaign.
-	 * @param array $campaign_settings_v2 The campaign settings.
-	 * @param WP_Post $campaign_post The campaign post object.
-	 * @param bool $is_preview Whether it's a preview.
+	 * @param int      $campaign_id           The ID of the campaign.
+	 * @param array    $campaign_settings_v2  The campaign settings.
+	 * @param WP_Post  $campaign_post         The campaign post object.
+	 * @param bool     $is_preview            Whether it's a preview.
 	 */
 	public function save_campaign_data( $campaign_id, $campaign_settings_v2, $campaign_post, $is_preview ) {
 		if ( ! function_exists( 'pushengage' ) ) {
 			return;
 		}
-		
-		$campaign_name = $campaign_settings_v2['title'];
-        $segments      = pushengage()->get_segments();
 
-		if ( ! is_wp_error( $segments ) && ! empty( $segments['data'] ) ) {
-			$segment = array_filter( $segments['data'], function( $segment ) use ( $campaign_name ) {
-				return $segment['segment_name'] === $campaign_name;
-			});
+		// Validate campaign name
+		$campaign_name = $campaign_settings_v2['title'] ?? '';
+		if ( empty( $campaign_name ) ) {
+			error_log( 'Campaign name is empty or invalid.' );
+			return;
+		}
 
-			if ( empty( $segment ) ) {
-                $new_segment = pushengage()->create_segment(
-                    [ 'segment_name' => esc_html( $campaign_name ) ]
-                );
-                if ( ! is_wp_error( $new_segment ) && ! empty( $new_segment['data'] ) ) {
-                    update_post_meta( $campaign_id, 'pe_charitable_segment', $new_segment['data'] );
-                }
-            }
-        }
+		// Fetch existing segments
+		$segments = pushengage()->get_segments();
+		if ( is_wp_error( $segments ) ) {
+			error_log( $segments->get_error_message() );
+			return;
+		}
+
+		$segment_data_list = $segments['data'] ?? [];
+
+		// Check if segment with the campaign name exists
+		$existing_segment = current( array_filter( $segment_data_list, function ( $segment ) use ( $campaign_name ) {
+			return isset( $segment['segment_name'] ) && $segment['segment_name'] === $campaign_name;
+		} ) );
+
+		// Check if segment data is already stored in the campaign meta
+		$stored_segment = get_post_meta( $campaign_id, 'pe_charitable_segment', true );
+
+		if ( empty( $existing_segment ) && empty( $stored_segment ) ) {
+			// Create a new segment if no existing or stored segment is found
+			$this->create_and_save_segment( $campaign_id, $campaign_name );
+		} elseif ( ! empty( $stored_segment['segment_name'] ) ) {
+			// Ensure stored segment is updated if necessary
+			$this->create_and_save_segment( $campaign_id, $stored_segment['segment_name'] );
+		}
 	}
+
+	/**
+	 * Helper method to create and save a segment.
+	 *
+	 * @param int    $campaign_id   The ID of the campaign.
+	 * @param string $segment_name  The name of the segment.
+	 */
+	private function create_and_save_segment( $campaign_id, $segment_name ) {
+		$new_segment = pushengage()->create_segment( [ 'segment_name' => esc_html( $segment_name ) ] );
+
+		if ( is_wp_error( $new_segment ) ) {
+			error_log( $new_segment->get_error_message() );
+			return;
+		}
+
+		if ( ! empty( $new_segment['data'] ) ) {
+			update_post_meta( $campaign_id, 'pe_charitable_segment', $new_segment['data'] );
+		}
+	}
+
 }
 
 /**
