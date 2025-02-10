@@ -71,6 +71,8 @@ class PE_Charitable_Sample {
 			return;
 		}
 
+		$get_audiance_groups = pushengage()->get_audience_groups();
+
 		$campaign_name = $donation_processor->get_campaign_names();
 		$donation_data = $donation_processor->get_campaign_donations_data();
         $campaign_id   = $donation_processor->get_campaign()->get_campaign_id();
